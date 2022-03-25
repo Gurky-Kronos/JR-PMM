@@ -1,0 +1,54 @@
+######################################################
+#                                                    #
+#   / | / /__  / /_/ __ \/ /__  _  __/ ____/ (_)  __ #
+#  /  |/ / _ \/ __/ /_/ / / _ \| |/_/ /_  / / / |/_/ #
+# / /|  /  __/ /_/ ____/ /  __/>  </ __/ / / />  <   #
+#/_/ |_/\___/\__/_/   /_/\___/_/|_/_/   /_/_/_/|_|   #
+#         Plex Meta Manager Movie.yml Config         #
+#                                                    #
+######################################################
+#                    TEMPLATES                       #
+######################################################
+templates:
+  Chart:
+    sort_title: +1_<<num>><<collection_name>>
+    sync_mode: sync
+    smart_label: added.desc
+  Best of:
+    trakt_list: https://trakt.tv/users/lish408/lists/rotten-tomatoes-best-of-<<year>>
+    sort_title: +1_Best of <<year>>
+    sync_mode: sync
+    summary: Rotten Tomatoes Highest rated Movies of <<year>>
+    smart_label: audience_rating.desc
+######################################################
+#                    COLLECTIONS                     #
+######################################################
+collections:
+######################################################
+#                      BEST OF                       #
+######################################################
+  Trending Movies  :
+    template: { name: Chart, num: 2 }
+    trakt_trending: 15
+    tmdb_trending_daily: 15
+    tmdb_trending_weekly: 15
+    summary: Movies Trending now
+    sync_mode: sync
+  IMDb Best Recent:
+    smart_label: release.desc
+    sync_mode: sync
+    summary: Movies rated 7 or higher on IMDb, released in the past 6 months.
+    sort_title: '+1_4 IMDb Best Rated'
+    collection_mode: default
+    plex_search:
+      audience_rating.gte: 7.0
+      release: 180
+  IMDB Top 250:
+    imdb_list: https://www.imdb.com/search/title/?groups=top_250&count=250&sort=user_rating,desc
+    summary: Movies that are in IMDB's Top 250 Movies of all time list
+    sort_title: '+2 IMDB'
+    collection_order: release
+    collection_mode: default
+  Oscars Best Picture Winners:
+    sort_title: '+2 Oscars Best Picture Winners'
+    trakt_list: https://trakt.tv/users/pjcob/lists/1970-2021-oscars-best-picture-winners?sort=rank,asc
